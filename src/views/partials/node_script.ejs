@@ -1,0 +1,42 @@
+import React from "react";
+import { useTheme } from "@mui/material";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+
+import type { Control } from "react-hook-form";
+import type { UiNode, UiNodeScriptAttributes } from "@ory/client";
+
+interface Props {
+    control: Control;
+    node: UiNode;
+    attributes: UiNodeScriptAttributes;
+}
+
+export default function Component(props: Props) {
+    const theme = useTheme();
+    const router = useRouter();
+    const { t } = useTranslation();
+
+    const { control, node, attributes } = props;
+
+    React.useEffect(() => {
+        const script = document.createElement("script");
+
+        script.async = true;
+        script.setAttribute("data-testid", `node/script/${attributes.id}`);
+        script.src = attributes.src;
+        script.async = attributes.async;
+        script.crossOrigin = attributes.crossorigin;
+        script.integrity = attributes.integrity;
+        script.referrerPolicy = attributes.referrerpolicy;
+        script.type = attributes.type;
+
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, [attributes]);
+
+    return null;
+}

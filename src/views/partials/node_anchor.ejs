@@ -1,0 +1,50 @@
+import React from "react";
+import { useTheme } from "@mui/material";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+
+import type { Control } from "react-hook-form";
+import type { UiNode, UiNodeAnchorAttributes } from "@ory/client";
+
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+
+import { getText } from "app/ory";
+
+interface Props {
+    control: Control;
+    node: UiNode;
+    attributes: UiNodeAnchorAttributes;
+}
+
+export default function Component(props: Props) {
+    const theme = useTheme();
+    const router = useRouter();
+    const { t } = useTranslation();
+
+    const { control, node, attributes } = props;
+
+    const {
+        _formState: { isSubmitting },
+    } = control;
+
+    return (
+        <Button
+            disabled={isSubmitting}
+            onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                window.location.href = attributes.href;
+            }}
+            variant="contained"
+            color="primary"
+            fullWidth
+        >
+            {isSubmitting ? (
+                <CircularProgress color="primary" />
+            ) : (
+                getText(t, node.meta.label)
+            )}
+        </Button>
+    );
+}
