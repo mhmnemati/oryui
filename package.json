@@ -17,9 +17,9 @@
     },
     "scripts": {
         "start": "nodemon --exec \"node -r ts-node/register --inspect=0.0.0.0\" src/index.ts",
-        "build": "tsc && cp .env VERSION CHANNEL CHANGELOG dist",
+        "build": "tsc && cp -Rf src/views src/locales dist && cp .env VERSION CHANNEL CHANGELOG dist",
         "test": "mocha \"test/**/*.test.ts\"",
-        "deploy": "node . --migrate && node ."
+        "deploy": "node ."
     },
     "repository": {
         "type": "git",
