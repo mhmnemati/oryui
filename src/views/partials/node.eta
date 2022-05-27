@@ -1,47 +1,11 @@
-import React from "react";
-
-import type { Control } from "react-hook-form";
-import type { UiNode } from "@ory/client";
-
-import {
-    isUiNodeAnchorAttributes,
-    isUiNodeImageAttributes,
-    isUiNodeInputAttributes,
-    isUiNodeScriptAttributes,
-    isUiNodeTextAttributes,
-} from "@ory/integrations/ui";
-
-import NodeAnchor from "./NodeAnchor";
-import NodeImage from "./NodeImage";
-import NodeInput from "./NodeInput";
-import NodeScript from "./NodeScript";
-import NodeText from "./NodeText";
-
-interface Props {
-    control: Control;
-    node: UiNode;
-}
-
-export default function Component(props: Props) {
-    if (isUiNodeImageAttributes(props.node.attributes)) {
-        return <NodeImage {...props} attributes={props.node.attributes} />;
-    }
-
-    if (isUiNodeScriptAttributes(props.node.attributes)) {
-        return <NodeScript {...props} attributes={props.node.attributes} />;
-    }
-
-    if (isUiNodeTextAttributes(props.node.attributes)) {
-        return <NodeText {...props} attributes={props.node.attributes} />;
-    }
-
-    if (isUiNodeAnchorAttributes(props.node.attributes)) {
-        return <NodeAnchor {...props} attributes={props.node.attributes} />;
-    }
-
-    if (isUiNodeInputAttributes(props.node.attributes)) {
-        return <NodeInput {...props} attributes={props.node.attributes} />;
-    }
-
-    return null;
-}
+<% if (it.ui.attributes.node_type === "a") { %>
+<%~ includeFile("./node_anchor", { t: it.t, ui: it.ui }) %>
+<% } else if (it.ui.attributes.node_type === "img") { %>
+<%~ includeFile("./node_image", { t: it.t, ui: it.ui }) %>
+<% } else if (it.ui.attributes.node_type === "input") { %>
+<%~ includeFile("./node_input", { t: it.t, ui: it.ui }) %>
+<% } else if (it.ui.attributes.node_type === "text") { %>
+<%~ includeFile("./node_text", { t: it.t, ui: it.ui }) %>
+<% } else if (it.ui.attributes.node_type === "script") { %>
+<%~ includeFile("./node_script", { t: it.t, ui: it.ui }) %>
+<% } %>

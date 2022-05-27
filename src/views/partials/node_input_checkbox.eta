@@ -1,60 +1,13 @@
-import React from "react";
-import { useTheme } from "@mui/material";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
-
-import type { Control } from "react-hook-form";
-import type { UiNode, UiNodeInputAttributes } from "@ory/client";
-
-import { useController } from "react-hook-form";
-import Checkbox from "@mui/material/Checkbox";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControlLabel from "@mui/material/FormControlLabel";
-
-import { getText } from "app/ory";
-
-interface Props {
-    control: Control;
-    node: UiNode;
-    attributes: UiNodeInputAttributes;
-}
-
-export default function Component(props: Props) {
-    const theme = useTheme();
-    const router = useRouter();
-    const { t } = useTranslation();
-
-    const { control, node, attributes } = props;
-
-    const {
-        field,
-        fieldState,
-        formState: { isSubmitting },
-    } = useController({
-        defaultValue: attributes.value,
-        control,
-        name: attributes.name,
-    });
-
-    return (
-        <FormControl
-            error={!!fieldState.error}
-            component="fieldset"
-            variant="outlined"
-        >
-            <FormControlLabel
-                label={getText(t, node.meta.label)}
-                control={
-                    <Checkbox
-                        {...field}
-                        disabled={attributes.disabled || isSubmitting}
-                    />
-                }
-            />
-            {fieldState.error && (
-                <FormHelperText>{fieldState.error.message}</FormHelperText>
-            )}
-        </FormControl>
-    );
-}
+<fieldset>
+    <label>
+        <input
+            name="<%= it.ui.attributes.name %>"
+            type="<%= it.ui.attributes.type %>"
+            value="<%= it.ui.attributes.value %>"
+            disabled="<%= it.ui.attributes.disabled %>"
+            placeholder="<%= it.t(it.ui.meta.label) %>"
+        />
+        <span><%= it.t(it.ui.meta.label) %></span>
+    </label>
+    <%= JSON.stringify(it.ui.messages) %>
+</fieldset>

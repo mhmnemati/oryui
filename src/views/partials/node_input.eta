@@ -1,3 +1,11 @@
-{{#each fields}}
-    {{> (toFormInputPartialName type)}}
-{{/each}}
+<% if (it.ui.attributes.type === "checkbox") { %>
+<%~ includeFile("./node_input_checkbox", { t: it.t, ui: it.ui }) %>
+<% } else if (it.ui.attributes.type === "button") { %>
+<%~ includeFile("./node_input_button", { t: it.t, ui: it.ui }) %>
+<% } else if (it.ui.attributes.type === "submit") { %>
+<%~ includeFile("./node_input_submit", { t: it.t, ui: it.ui }) %>
+<% } else if (it.ui.attributes.type === "hidden") { %>
+<%~ includeFile("./node_input_hidden", { t: it.t, ui: it.ui }) %>
+<% } else { %>
+<%~ includeFile("./node_input_text", { t: it.t, ui: it.ui }) %>
+<% } %>

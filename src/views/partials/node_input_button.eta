@@ -1,11 +1,7 @@
-<button name="{{name}}" type="{{type}}" value="{{value}}" {{#if disabled}}disabled{{/if}}>
-    {{#if (eq name 'provider')}}
-        Continue with {{value}}
-    {{else if (eq name 'link')}}
-        Link {{value}}
-    {{else if (eq name 'unlink')}}
-        Unlink {{value}}
-    {{else}}
-        {{value}}
-    {{/if}}
-</button>
+<input
+    name="<%= it.ui.attributes.name %>"
+    type="<%= it.ui.attributes.type %>"
+    value="<%= it.t(it.ui.meta.label) %>"
+    disabled="<%= it.ui.attributes.disabled %>"
+    onclick="<%= it.ui.attributes.onclick %>"
+/>

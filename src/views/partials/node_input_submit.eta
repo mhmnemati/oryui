@@ -1,51 +1,7 @@
-import React from "react";
-import { useTheme } from "@mui/material";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
-
-import type { Control } from "react-hook-form";
-import type { UiNode, UiNodeInputAttributes } from "@ory/client";
-
-import { useController } from "react-hook-form";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-
-import { getText } from "app/ory";
-
-interface Props {
-    control: Control;
-    node: UiNode;
-    attributes: UiNodeInputAttributes;
-}
-
-export default function Component(props: Props) {
-    const theme = useTheme();
-    const router = useRouter();
-    const { t } = useTranslation();
-
-    const { control, node, attributes } = props;
-
-    const {
-        formState: { isSubmitting },
-    } = useController({
-        defaultValue: attributes.value,
-        control,
-        name: attributes.name,
-    });
-
-    return (
-        <Button
-            disabled={attributes.disabled || isSubmitting}
-            variant="contained"
-            color="primary"
-            type="submit"
-            fullWidth
-        >
-            {isSubmitting ? (
-                <CircularProgress color="primary" />
-            ) : (
-                getText(t, node.meta.label)
-            )}
-        </Button>
-    );
-}
+<input
+    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+    name="<%= it.ui.attributes.name %>"
+    type="<%= it.ui.attributes.type %>"
+    value="<%= it.ui.attributes.value %>"
+    <% if (it.ui.attributes.disabled) { %>disabled<% } %>
+/>

@@ -1,36 +1,3 @@
-import React from "react";
-import { useTheme } from "@mui/material";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
-
-import type { Control } from "react-hook-form";
-import type { UiNode, UiNodeTextAttributes } from "@ory/client";
-
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-
-import { getText } from "app/ory";
-
-interface Props {
-    control: Control;
-    node: UiNode;
-    attributes: UiNodeTextAttributes;
-}
-
-export default function Component(props: Props) {
-    const theme = useTheme();
-    const router = useRouter();
-    const { t } = useTranslation();
-
-    const { control, node, attributes } = props;
-
-    // const {
-    //     _formState: { isSubmitting },
-    // } = control;
-
-    return (
-        <Paper>
-            <Typography>{getText(t, attributes.text)}</Typography>
-        </Paper>
-    );
-}
+<span>
+    <%= it.t(it.ui.meta.label) %>
+</span>
