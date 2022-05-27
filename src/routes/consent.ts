@@ -1,5 +1,9 @@
-import { app } from "../app/app";
+import express from "express";
 
-app.get("/consent", function (req, res, next) {
+const router = express.Router();
+
+router.get("/consent", function (req, res, next) {
     res.render("consent", { title: "Express" });
 });
+
+export default router;

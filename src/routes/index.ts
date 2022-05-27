@@ -1,5 +1,9 @@
-import { app } from "../app/app";
+import express from "express";
 
-app.get("/", function (req, res, next) {
+const router = express.Router();
+
+router.get("/", function (req, res, next) {
     res.render("index", { title: "Express" });
 });
+
+export default router;

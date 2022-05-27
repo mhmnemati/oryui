@@ -1,0 +1,5 @@
+<% layout('./layouts/default') %>
+
+<div id="content">
+    <p><%= it.message %></p>
+</div>

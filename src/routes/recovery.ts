@@ -1,5 +1,9 @@
-import { app } from "../app/app";
+import express from "express";
 
-app.get("/recovery", function (req, res, next) {
+const router = express.Router();
+
+router.get("/recovery", function (req, res, next) {
     res.render("recovery", { title: "Express" });
 });
+
+export default router;

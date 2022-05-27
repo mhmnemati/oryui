@@ -1,6 +1,6 @@
 <div class="auth">
     <div class="container">
-        {{> icon_logo}}
+        <%= it.__("4000001") %>
         <h5 class="subheading">Welcome to this example login screen!</h5>
 
         {{> messages messages=messages className="global"}}
