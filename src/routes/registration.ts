@@ -3,23 +3,28 @@ import { Express } from "express";
 import { kratos } from "../app/ory";
 
 export default (app: Express) => {
-    app.get("/login", async (req, res) => {
-        const flowId = req.query.flow;
+    app.get("/registration", async (req, res, next) => {
+        const flow = req.query.flow;
 
-        if (!flowId) {
-            res.redirect(
-                "http://localhost:4433/self-service/registration/browser"
+        if (!flow) {
+            const params = new URLSearchParams(req.query as any);
+
+            return res.redirect(
+                `http://localhost:4433/self-service/registration/browser?${params.toString()}`
             );
-            return;
         }
 
-        const { data } = await kratos.getSelfServiceRegistrationFlow(
-            String(flowId),
-            req.headers.cookie
-        );
+        try {
+            const { data } = await kratos.getSelfServiceRegistrationFlow(
+                String(flow),
+                req.headers.cookie
+            );
 
-        res.render("registration", {
-            ui: data.ui,
-        });
+            res.render("registration", {
+                ui: data.ui,
+            });
+        } catch (err) {
+            next(err);
+        }
     });
 };

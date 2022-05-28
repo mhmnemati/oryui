@@ -3,10 +3,10 @@ import { Express } from "express";
 import { kratos } from "../app/ory";
 
 export default (app: Express) => {
-    app.get("/login", async (req, res) => {
-        const flowId = req.query.flow;
+    app.get("/login", async (req, res, next) => {
+        const flow = req.query.flow;
 
-        if (!flowId) {
+        if (!flow) {
             const params = new URLSearchParams(req.query as any);
 
             return res.redirect(
@@ -14,13 +14,17 @@ export default (app: Express) => {
             );
         }
 
-        const { data } = await kratos.getSelfServiceLoginFlow(
-            String(flowId),
-            req.headers.cookie
-        );
+        try {
+            const { data } = await kratos.getSelfServiceLoginFlow(
+                String(flow),
+                req.headers.cookie
+            );
 
-        res.render("login", {
-            ui: data.ui,
-        });
+            res.render("login", {
+                ui: data.ui,
+            });
+        } catch (err) {
+            next(err);
+        }
     });
 };

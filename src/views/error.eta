@@ -1,7 +1,6 @@
 <div class="content">
-    {{> header}}
     <div class="container">
         <h1>An error occurred</h1>
-        <pre><code>{{message}}</code></pre>
+        <pre><code><%= it.message %></code></pre>
     </div>
 </div>
