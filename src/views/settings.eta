@@ -1,35 +1,5 @@
-<div class="content">
-    {{> header}}
-    <div class="container">
-        <h2>Settings</h2>
+<% layout("./layouts/auth") %>
 
-        {{> messages messages=messages className="global"}}
-
-        {{#if (eq state "success")}}
-            <p>Your changes have been saved!</p>
-        {{/if}}
-
-        {{#if profile}}
-            <div id="user-profile">
-                <h3>Profile</h3>
-                {{> form submitLabel="Save" form=profile}}
-            </div>
-        {{/if}}
-
-        {{#if password}}
-            <hr />
-            <div id="user-password">
-                <h3>Password</h3>
-                {{> form submitLabel="Save" form=password}}
-            </div>
-        {{/if}}
-
-        {{#if oidc}}
-            <hr />
-            <div id="user-oidc">
-                <h3>Social Sign In</h3>
-                {{> form form=oidc}}
-            </div>
-        {{/if}}
-    </div>
-</div>
+<h3 class="text-2xl font-bold text-center">Account Settings</h3>
+<%~ includeFile("./partials/form", { t: it.t, ui: it.ui }) %>
+<a href="/login" class="text-sm text-blue-600 hover:underline"><%= it.t("links.have_account") %></a>

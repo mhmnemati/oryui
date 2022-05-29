@@ -1,10 +1,12 @@
 <form action="<%= it.ui.action %>" method="<%= it.ui.method %>">
-    <% if (it.ui.messages?.length > 0) { %>
-        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-            <%= it.t(it.ui.messages[0]) %>
-        </p>
-    <% } %>
-    <% it.ui.nodes?.filter((node) => node.group === "default" || node.group === (it.only || node.group)).forEach((node) => { %>
-    <%~ includeFile("./node", { t: it.t, ui: node }) %>
-    <% }) %>
+    <div class="mt-4">
+        <% if (it.ui.messages?.length > 0) { %>
+            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                <%= it.t(it.ui.messages[0]) %>
+            </p>
+        <% } %>
+        <% it.ui.nodes?.filter((node) => node.group === "default" || node.group === (it.only || node.group)).forEach((node) => { %>
+        <%~ includeFile("./node", { t: it.t, ui: node }) %>
+        <% }) %>
+    </div>
 </form>

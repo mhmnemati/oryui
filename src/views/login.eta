@@ -1,5 +1,6 @@
-<% layout("./layouts/default") %>
+<% layout("./layouts/auth") %>
 
-<div class="min-h-full flex items-center justify-center">
-    <%~ includeFile("./partials/form", { t: it.t, ui: it.ui }) %>
-</div>
+<h3 class="text-2xl font-bold text-center">Login to your account</h3>
+<%~ includeFile("./partials/form", { t: it.t, ui: it.ui }) %>
+<a href="/recovery" class="text-sm text-blue-600 hover:underline"><%= it.t("links.forget_password") %></a>
+<a href="/registration" class="text-sm text-blue-600 hover:underline"><%= it.t("links.dont_have_account") %></a>

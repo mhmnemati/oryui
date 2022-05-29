@@ -1,18 +1,5 @@
-<div class="content">
-    {{> header}}
-    <div class="container">
-        <h4>Verify your email address</h4>
+<% layout("./layouts/auth") %>
 
-        {{> messages messages=messages className="global"}}
-
-        {{#if (eq state "passed_challenge")}}
-            <p>Verification successful!</p>
-        {{/if}}
-
-        {{#if link}}
-            <div id="verification-token">
-                {{> form form=link submitLabel="Resend verification link"}}
-            </div>
-        {{/if}}
-    </div>
-</div>
+<h3 class="text-2xl font-bold text-center">Account Verification</h3>
+<%~ includeFile("./partials/form", { t: it.t, ui: it.ui }) %>
+<a href="/login" class="text-sm text-blue-600 hover:underline"><%= it.t("links.have_account") %></a>

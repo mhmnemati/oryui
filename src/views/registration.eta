@@ -1,27 +1,5 @@
-<div class="auth">
-    <div class="container">
-        {{> icon_logo}}
-        <h5 class="subheading">Welcome to SecureApp! <br/>
-            Use the form below to sign up:</h5>
+<% layout("./layouts/auth") %>
 
-        {{> messages messages=messages className="global"}}
-
-        {{#if password}}
-            <div id="registration-password">
-                {{> form submitLabel="Sign up" form=password}}
-            </div>
-        {{/if}}
-
-        {{#if oidc}}
-            <div id="registration-oidc">
-                {{> form form=oidc}}
-            </div>
-        {{/if}}
-
-        <hr class="divider">
-
-        <div class="alternative-actions">
-            <a href="{{pathPrefix}}auth/login">Already have an account? Log in instead</a>
-        </div>
-    </div>
-</div>
+<h3 class="text-2xl font-bold text-center">Registration</h3>
+<%~ includeFile("./partials/form", { t: it.t, ui: it.ui }) %>
+<a href="/login" class="text-sm text-blue-600 hover:underline"><%= it.t("links.have_account") %></a>
