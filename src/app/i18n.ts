@@ -1,9 +1,14 @@
 import path from "path";
+import fs from "fs";
 
 const { I18n } = require("i18n");
 
+const locales = fs
+    .readdirSync(path.join(__dirname, "..", "locales"))
+    .map((file) => file.replace(".json", ""));
+
 export let i18n = new I18n({
-    locales: ["fa", "en"],
+    locales: locales,
     defaultLocale: "en",
     objectNotation: true,
     directory: path.join(__dirname, "..", "locales"),
