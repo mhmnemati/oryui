@@ -4,8 +4,6 @@ import fs from "fs";
 
 import { renderFile } from "eta";
 
-import { i18n } from "./i18n";
-
 export const app = express();
 
 app.engine("eta", renderFile);
@@ -17,8 +15,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(require("cookie-parser")());
 app.use(express.static(path.join(__dirname, "..", "..", "public")));
-
-app.use(i18n.init);
 
 app.get("/health", (_, res) => res.send("ok"));
 
