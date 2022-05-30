@@ -10,7 +10,14 @@ export default (app: Express) => {
                     req.headers.cookie
                 );
 
-            res.redirect(data.logout_url);
+            const params = new URLSearchParams({
+                ...req.query,
+                token: data.logout_token,
+            } as any);
+
+            return res.redirect(
+                `http://localhost:4433/self-service/logout?${params.toString()}`
+            );
         } catch (err) {
             next(err);
         }
