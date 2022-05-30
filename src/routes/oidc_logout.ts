@@ -4,13 +4,11 @@ import { kratos, hydra } from "../app/ory";
 
 export default (app: Express) => {
     app.get("/oidc/logout", async (req, res, next) => {
-        const logoutChallenge = req.query.logout_challenge;
+        const challenge = req.query.logout_challenge;
 
-        if (!logoutChallenge) {
+        if (!challenge) {
             return next(new Error("Challenge was not found!"));
         }
-
-        const { data } = await hydra.getLogoutRequest(String(logoutChallenge));
 
         const { data: session } = await kratos.toSession(
             undefined,
@@ -27,7 +25,7 @@ export default (app: Express) => {
             return res.redirect(`/logout?${params.toString()}`);
         } else {
             const { data: accept } = await hydra.acceptLogoutRequest(
-                String(logoutChallenge)
+                String(challenge)
             );
 
             return res.redirect(accept.redirect_to);

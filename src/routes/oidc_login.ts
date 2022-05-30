@@ -4,17 +4,17 @@ import { kratos, hydra } from "../app/ory";
 
 export default (app: Express) => {
     app.get("/oidc/login", async (req, res, next) => {
-        const loginChallenge = req.query.login_challenge;
+        const challenge = req.query.login_challenge;
 
-        if (!loginChallenge) {
+        if (!challenge) {
             return next(new Error("Challenge was not found!"));
         }
 
-        const { data } = await hydra.getLoginRequest(String(loginChallenge));
+        const { data } = await hydra.getLoginRequest(String(challenge));
 
         if (data.skip) {
             const { data: accept } = await hydra.acceptLoginRequest(
-                String(loginChallenge),
+                String(challenge),
                 {
                     subject: data.subject,
                 }
@@ -38,7 +38,7 @@ export default (app: Express) => {
             return res.redirect(`/login?${params.toString()}`);
         } else {
             const { data: accept } = await hydra.acceptLoginRequest(
-                String(loginChallenge),
+                String(challenge),
                 {
                     subject: session.identity.id,
                     context: session,
