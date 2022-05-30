@@ -1,0 +1,15 @@
+<% layout("./layouts/auth") %>
+
+<h3 class="text-2xl font-bold text-center">Access Consent</h3>
+<form action="/oidc/consent" method="POST">
+    <div class="mt-4">
+        <input type="hidden" name="csrf" value="???" />
+        <input type="hidden" name="challenge" value="???" />
+        <% for (const scope of it.scopes) { %>
+            <input type="checkbox" name="<%= scope %>" value="false" />
+        <% } %>
+        <input type="submit" name="action" value="accept" />
+        <input type="submit" name="action" value="reject" />
+    </div>
+</form>
+
