@@ -3,7 +3,7 @@ import { Express } from "express";
 import { kratos } from "../app/ory";
 
 export default (app: Express) => {
-    app.get("/settings", async (req, res, next) => {
+    app.get("/settings", async (req, res) => {
         const flow = req.query.flow;
 
         if (!flow) {
@@ -14,17 +14,13 @@ export default (app: Express) => {
             );
         }
 
-        try {
-            const { data } = await kratos.getSelfServiceSettingsFlow(
-                String(flow),
-                req.headers.cookie
-            );
+        const { data } = await kratos.getSelfServiceSettingsFlow(
+            String(flow),
+            req.headers.cookie
+        );
 
-            res.render("settings", {
-                ui: data.ui,
-            });
-        } catch (err) {
-            next(err);
-        }
+        res.render("settings", {
+            ui: data.ui,
+        });
     });
 };
