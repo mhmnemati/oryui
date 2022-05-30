@@ -1,9 +1,10 @@
 import { Express } from "express";
 
 import { hydra } from "../app/ory";
+import { csrf } from "../app/csrf";
 
 export default (app: Express) => {
-    app.get("/oidc/consent", async (req, res, next) => {
+    app.get("/oidc/consent", csrf, async (req, res, next) => {
         const challenge = req.query.consent_challenge;
 
         if (!challenge) {
@@ -30,7 +31,7 @@ export default (app: Express) => {
         }
 
         res.render("oidc_concent", {
-            csrf_token: "???",
+            csrf_token: req.csrfToken(),
             challenge: challenge,
             requested_scope: data.requested_scope,
             subject: data.subject,
@@ -38,7 +39,7 @@ export default (app: Express) => {
         });
     });
 
-    app.post("/oidc/consent", async (req, res, next) => {
+    app.post("/oidc/consent", csrf, async (req, res, next) => {
         const challenge = req.body.challenge;
         const action = req.body.action;
 
