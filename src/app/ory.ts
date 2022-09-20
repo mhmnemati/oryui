@@ -6,4 +6,8 @@ export const kratos = new kratosClient.V0alpha2Api(
         basePath: process.env.KRATOS_URL,
     })
 );
-export const hydra = new hydraClient.AdminApi();
+export const hydra = new hydraClient.AdminApi(
+    new hydraClient.Configuration({
+        basePath: process.env.HYDRA_URL,
+    })
+);
