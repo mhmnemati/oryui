@@ -13,9 +13,9 @@ app.set("views", path.join(__dirname, "..", "views"));
 app.set("view engine", "eta");
 
 app.use(require("morgan")("tiny"));
+app.use(require("cookie-parser")());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(require("cookie-parser")());
 app.use(express.static(path.join(__dirname, "..", "..", "public")));
 
 app.use(i18n.init);
