@@ -1,4 +1,5 @@
 require("dotenv").config();
+require("express-async-errors");
 
 import { app } from "./app/app";
 
