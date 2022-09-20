@@ -33,7 +33,7 @@
     ],
     "dependencies": {
         "@ory/hydra-client": "^1.11.8",
-        "@ory/kratos-client": "^0.9.0-alpha.3",
+        "@ory/kratos-client": "^0.10.1",
         "cookie-parser": "^1.4.6",
         "csurf": "^1.11.0",
         "dotenv": "^16.0.1",
