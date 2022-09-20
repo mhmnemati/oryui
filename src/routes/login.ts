@@ -2,6 +2,8 @@ import { Express } from "express";
 
 import { kratos } from "../app/ory";
 
+const kratosURL = (kratos as any).basePath;
+
 export default (app: Express) => {
     app.get("/login", async (req, res) => {
         const flow = req.query.flow;
@@ -10,7 +12,7 @@ export default (app: Express) => {
             const params = new URLSearchParams(req.query as any);
 
             return res.redirect(
-                `http://localhost:4433/self-service/login/browser?${params.toString()}`
+                `${kratosURL}/self-service/login/browser?${params.toString()}`
             );
         }
 

@@ -2,6 +2,8 @@ import { Express } from "express";
 
 import { kratos } from "../app/ory";
 
+const kratosURL = (kratos as any).basePath;
+
 export default (app: Express) => {
     app.get("/logout", async (req, res) => {
         const { data } = await kratos.createSelfServiceLogoutFlowUrlForBrowsers(
@@ -14,7 +16,7 @@ export default (app: Express) => {
         } as any);
 
         return res.redirect(
-            `http://localhost:4433/self-service/logout?${params.toString()}`
+            `${kratosURL}/self-service/logout?${params.toString()}`
         );
     });
 };
